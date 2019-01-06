@@ -5,6 +5,14 @@ const schema = gql`
         products: [Product]
     }
 
+    # this schema allows the following mutation:
+    type Mutation {
+        create_product (
+            id: Int!
+            name: String!
+        ): Product
+    }
+
     type Product {
         id: Int!
         name: String!

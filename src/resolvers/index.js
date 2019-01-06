@@ -3,21 +3,22 @@ const Product = require("../model");
 
 const resolvers = {
     Query: {
-        products: (parent, _, context) => {
-            // const p = new Product({
-            //     id: 3,
-            //     name: "Paper"
-            // });
-            // p.save((err) => {
-            //     if (err) {
-            //         console.log('Product save error!');
-            //     }
-            //     console.log('Product saved successfully!');
-            // });
-            return Product.find({}, (err, products) => {
-                if (err) throw err;
-                return products;
-            });
+        products: async (parent, _, context) => {
+            const products = await Product.find({});
+            return products;
+        }
+    },
+    Mutation: {
+        create_product: async (_, { id, name }) => {
+            const products = await Product.find({id});
+            if (products && products.length > 0) {
+                console.log('Product already exists with this id - error!');
+                return null; // TODO
+            }
+
+            const p = new Product({id, name});
+            const savedProduct = await p.save();
+            return savedProduct.toObject();
         }
     }
 };

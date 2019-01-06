@@ -9,9 +9,11 @@
     "express": "^4.16.4",
     "graphql": "^14.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  },
   "scripts": {
-    "start": "node src/index.js"
+    "start": "nodemon src"
   },
   "author": "",
   "license": "ISC"

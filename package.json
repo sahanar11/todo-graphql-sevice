@@ -14,7 +14,8 @@
     "nodemon": "^1.18.9"
   },
   "scripts": {
-    "start": "nodemon src"
+    "start": "nodemon src",
+    "debug": "node --inspect src"
   },
   "author": "",
   "license": "ISC"

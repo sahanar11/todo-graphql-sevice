@@ -2,11 +2,12 @@ const { gql } = require('apollo-server-express');
 
 const schema = gql`
     type Query {
-        user: User
+        products: [Product]
     }
 
-    type User {
-        username: String!
+    type Product {
+        id: Int!
+        name: String!
     }
 `;
 

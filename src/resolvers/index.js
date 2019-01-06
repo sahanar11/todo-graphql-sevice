@@ -1,10 +1,11 @@
 
 const resolvers = {
     Query: {
-        user: () => {
-            return {
-            username: 'Robin ss',
-            };
+        products: () => {
+            return [{
+                id: 0,
+                name: 'Chair',
+            }];
         }
     }
 };

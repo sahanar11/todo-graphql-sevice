@@ -1,24 +1,52 @@
 
-const Product = require("../model");
+const Task = require("../model");
 
 const resolvers = {
     Query: {
-        products: async (parent, _, context) => {
-            const products = await Product.find({});
-            return products;
+        tasks: async (parent, _, context) => {
+            const tasks = await Task.find({});
+            return tasks;
         }
     },
     Mutation: {
-        create_product: async (_, { id, name }) => {
-            const products = await Product.find({id});
-            if (products && products.length > 0) {
-                console.log('Product already exists with this id - error!');
+        create_task: async (_, {TaskId, TaskDesc, Completed}) => {
+            const tasks = await Task.find({TaskId});
+            if (tasks && tasks.length > 0) {
+                console.log('Task already exists with this id - error!  ');
+                return null; // TODO
+            }
+            const p = new Task({TaskId, TaskDesc,Completed});
+            const savedTask = await p.save();
+            return savedTask.toObject();
+        },
+        update_task: async(_,{ TaskId, TaskDesc, Completed}) => {
+           
+            const tasks = await Task.find({TaskId});
+            if(tasks && tasks.length > 0){
+                const task = tasks[0];
+                task.TaskDesc = TaskDesc;
+                task.Completed = Completed;
+                const savedTask = await task.save();
+                return savedTask.toObject();
+            }
+            else
+            {
+                console.log('Task does not exists with this id - error!  ');
                 return null; // TODO
             }
 
-            const p = new Product({id, name});
-            const savedProduct = await p.save();
-            return savedProduct.toObject();
+        },
+        delete_task: async(_,{ TaskId}) => {
+            const tasks = await Task.find({TaskId});
+            if(tasks && tasks.length > 0){
+                const task = tasks[0];
+                const deletedTask = await task.remove();
+                return deletedTask.toObject();
+            }else
+            {
+                console.log('Task does not exists with this id - error!  ');
+                return null; // TODO
+            }
         }
     }
 };

@@ -9,10 +9,10 @@ const app = express();
 
 const server = new ApolloServer({
   typeDefs: schema,
-  resolvers,
+  resolvers: resolvers,
   // Context is where we can store authScope, dbCon, etc - so that resolvers can get access to the same.
   context: async ({ req }) => ({
-    db: await mongoose.connect('mongodb://localhost/shopping-cart')
+    db: await mongoose.connect('mongodb://localhost/todo-1')
   })
 });
 

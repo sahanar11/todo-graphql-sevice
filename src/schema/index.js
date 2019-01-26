@@ -1,22 +1,33 @@
 const { gql } = require('apollo-server-express');
 
 const schema = gql`
-    type Query {
-        products: [Product]
-    }
+type Query {
+    tasks: [Task]
+  }
+  type Mutation {
+    update_task (
+        TaskId: Int
+        TaskDesc: String
+        Completed: Boolean
+    ): Task,
 
-    # this schema allows the following mutation:
-    type Mutation {
-        create_product (
-            id: Int!
-            name: String!
-        ): Product
-    }
+    delete_task (
+        TaskId: Int
+        TaskDesc: String
+        Completed: Boolean
+    ): Task,
 
-    type Product {
-        id: Int!
-        name: String!
-    }
+    create_task (
+        TaskId: Int
+        TaskDesc: String
+        Completed: Boolean
+    ): Task
+}
+  type Task {
+    TaskId: Int,
+    TaskDesc: String,
+    Completed: Boolean 
+  }
 `;
 
 module.exports = schema;

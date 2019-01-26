@@ -1,0 +1,43 @@
+
+
+
+
+fucntion pickupSahana() {
+    goToMainGate();
+    // polling
+    while (true){
+        if (sahanaHasArrived()) { // poll
+            break;
+        }
+        sleepFor30seconds()
+    }
+}
+
+pickupSahana();
+GoHome()
+DrinkTea()
+===
+
+
+fucntion pickupSahanaAsync() {
+    return new Promise((resolve) => {
+        goToMainGate();
+        callSahanaAndInformToCallback(function () {
+            resolve();
+        });
+    });
+}
+
+pickupSahanaAsync().then(() => {
+    GoHome();
+    DrinkTea();
+})
+
+
+
+
+--
+JS
+- callback functions
+- Promises
+- Generator Funcitons - Async / Await

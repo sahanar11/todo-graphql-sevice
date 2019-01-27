@@ -8,18 +8,24 @@ type Query {
     update_task (
         TaskId: Int
         TaskDesc: String
+        TaskCategory: String
+        Priority: Int
+        Created_date: Date
+        Due_Date: Date
         Completed: Boolean
     ): Task,
 
     delete_task (
         TaskId: Int
-        TaskDesc: String
-        Completed: Boolean
     ): Task,
 
     create_task (
         TaskId: Int
         TaskDesc: String
+        TaskCategory: String
+        Priority: Int
+        Created_date: Date
+        Due_Date: Date
         Completed: Boolean
     ): Task
 }

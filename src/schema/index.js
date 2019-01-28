@@ -1,8 +1,18 @@
 const { gql } = require('apollo-server-express');
 
 const schema = gql`
+type Task {
+    TaskId: Int,
+    TaskDesc: String,
+    Completed: Boolean 
+  }
+
 type Query {
-    tasks: [Task]
+    task(filterKey: String 
+        filterVal: String
+        TaskId: Int
+        ):[Task]
+    tasks(sortKey: String): [Task]
   }
   type Mutation {
     update_task (
@@ -10,8 +20,8 @@ type Query {
         TaskDesc: String
         TaskCategory: String
         Priority: Int
-        Created_date: Date
-        Due_Date: Date
+        Created_date: String
+        Due_Date: String
         Completed: Boolean
     ): Task,
 
@@ -24,16 +34,12 @@ type Query {
         TaskDesc: String
         TaskCategory: String
         Priority: Int
-        Created_date: Date
-        Due_Date: Date
+        Created_date: String
+        Due_Date: String
         Completed: Boolean
     ): Task
 }
-  type Task {
-    TaskId: Int,
-    TaskDesc: String,
-    Completed: Boolean 
-  }
+ 
 `;
 
 module.exports = schema;

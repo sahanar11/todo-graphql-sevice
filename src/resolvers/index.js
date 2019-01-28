@@ -2,8 +2,43 @@ const Task = require("../model");
 
 const resolvers = {
     Query: {
-        tasks: async (parent, _, context) => {
-            const tasks = await Task.find({});
+        task: async (_, {filterKey,filterVal,parent, context}) => {
+            let task;
+            if(filterKey == "TaskId"){
+                task = await Task.find({"TaskId": filterVal});
+            }else if(filterKey == "TaskDesc"){
+                task = await Task.find({"TaskDesc": filterVal});
+            }else if(filterKey == "Completed"){
+                task = await Task.find({"Completed": filterVal});
+            }else if(filterKey == "Priority"){
+                task = await Task.find({"Priority": filterVal});
+            }else if(filterKey == "TaskCategory"){
+                task = await Task.find({"TaskCategory": filterVal});
+            } else if(filterKey == "Created_Date"){
+                task = await Task.find({"Created_Date": filterVal});
+            }else if(filterKey == "Due_Date"){
+                task = await Task.find({"Due_Date": filterVal});
+            }
+            return task;
+        },
+      
+        tasks: async (_, {sortKey, parent, context}) => {
+            let tasks;
+            if(sortKey == "TaskId"){
+                tasks = await Task.find().sort({ TaskId:1 });    
+            }else if(sortKey == "TaskDesc"){
+                tasks = await Task.find().sort({ TaskDesc:1 });
+            }else if(sortKey == "Completed"){
+                tasks = await Task.find().sort({ Completed:1 });
+            }else if(sortKey == "Priority"){
+                tasks = await Task.find().sort({ Priority:1 });
+            }else if(sortKey == "TaskCategory"){
+                tasks = await Task.find().sort({ TaskCategory:1 });
+            }else if(sortKey == "Created_Date"){
+                tasks = await Task.find().sort({ Created_Date:1 });
+            }else if(sortKey == "Due_Date"){
+                tasks = await Task.find().sort({ Due_Date:1 });
+            }
             return tasks;
         }
     },
